@@ -6,11 +6,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var mongojs = require("mongojs");
-
+const app = express();
 // const indexRouter = require("./routes/index");
 // const usersRouter = require("./routes/users");
 
-const app = express();
+//Retrieve Routes
+const boats = require("./routes/API/boats");
 
 //Bodyparser Middleware
 app.use(bodyParser.json());
@@ -28,6 +29,11 @@ mongoose
   .connect(db)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
+
+//Use Routes
+app.use("/api/boats", boats);
+
+//port setup
 
 const port = process.env.PORT || 5000;
 
