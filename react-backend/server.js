@@ -1,95 +1,97 @@
 // const createError = require("http-errors");
-const express = require("express");
-// const path = require("path");
-// const cookieParser = require("cookie-parser");
-// const logger = require("morgan");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-var mongojs = require("mongojs");
+// const express = require("express");
+// // const path = require("path");
+// // const cookieParser = require("cookie-parser");
+// // const logger = require("morgan");
+// const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
+// var mongojs = require("mongojs");
 
-// const indexRouter = require("./routes/index");
-// const usersRouter = require("./routes/users");
+// var User = require("./models/userModel");
 
-const app = express();
+// // const indexRouter = require("./routes/index");
+// // const usersRouter = require("./routes/users");
 
-//Bodyparser Middleware
-app.use(bodyParser.json());
+// const app = express();
 
-// Database configuration
-// Save the URL of our database as well as the name of our collection
-var databaseUrl = "p3";
-var collections = ["boats"];
+// //Bodyparser Middleware
+// app.use(bodyParser.json());
 
-// Use mongojs to hook the database to the db variable
-var db = mongojs(databaseUrl, collections);
+// // Database configuration
+// // Save the URL of our database as well as the name of our collection
+// var databaseUrl = " mongodb://127.0.0.1:27017/X3Backend";
+// var collections = ["boats"];
 
-//Connect to Mongo
-mongoose
-  .connect(db)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+// // Use mongojs to hook the database to the db variable
+// // var db = mongojs(databaseUrl, collections);
 
-const port = process.env.PORT || 5000;
+// //Connect to Mongo
+// mongoose
+//   .connect("mongodb://127.0.0.1:27017/X3Backend")
 
-app.listen(port, () => console.log("Server started on port ${port}"));
+// var db = mongoose.connection;
+// 	.then(() => console.log("MongoDB Connected"))
+// 	.catch(err => console.log(err));
 
-// // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
+// const port = process.env.PORT || 5000;
 
-// app.use(logger("dev"));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "public")));
+// app.listen(port, () => console.log("Server started on port ${port}"));
+var express = require("express");
+var logger = require("morgan");
+var mongoose = require("mongoose");
 
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
+var PORT = 3000;
 
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+// Requiring the `User` model for accessing the `users` collection
+var User = require("./models/userModel");
+var Boats = require("./models/Boats");
 
-// //Mount Component Users by JC
+// Initialize Express
+var app = express();
 
-// class App extends Component {
-//   state = { users: [] };
+// Configure middleware
 
-//   componentDidMount() {
-//     fetch("/users")
-//       .then(res => res.json())
-//       .then(users => this.setState({ users }));
-//   }
+// Use morgan logger for logging requests
+app.use(logger("dev"));
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Make public a static folder
+app.use(express.static("public"));
 
-//   //Render Componenemts by JC
+// Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/X3Backend", { useNewUrlParser: true });
 
-//   render() {
-//     return (
-//       <div className="App">
-//         <h1>Users</h1>
+// Routes
 
-//         <ul>
-//           {this.state.users.map(user => (
-//             <li key={user.id}>{user.username}</li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
+// Create a new user using req.body
 
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
+User.create({ username: "Sam", password: "hellos", email: "sam@gmail.com" })
+	.then(function(dbUser) {
+		// If saved successfully, send the the new User document to the client
+		res.json(dbUser);
+	})
+	.catch(function(err) {
+		// If an error occurs, send the error to the client
+		res.json(err);
+	});
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render("error");
-// });
+Boats.createCollection({
+	name: "Sam",
+	passangers: "5",
+	rating: "5",
+	price: "40",
+})
+	.then(function(dbBoats) {
+		// If saved successfully, send the the new User document to the client
+		res.json(dbBoats);
+	})
+	.catch(function(err) {
+		// If an error occurs, send the error to the client
+		res.json(err);
+	});
 
-// module.exports = app;
-
-// export default App;
+// Start the server
+app.listen(PORT, function() {
+	console.log("App running on port " + PORT + "!");
+});
