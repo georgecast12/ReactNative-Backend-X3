@@ -5,21 +5,23 @@ var Schema = mongoose.Schema;
 
 // Create Schema
 var BoatSchema = new Schema({
+  thumbnail: {
+    type: String
+  },
+  image: {
+    type: String
+  },
   name: {
-    type: String,
-    required: true
+    type: String
   },
-  passengers: {
-    type: String,
-    required: true
+  location: {
+    type: String
   },
-  rating: {
-    type: String,
-    required: true
+  rents: {
+    type: String
   },
   price: {
-    type: String,
-    required: true
+    type: String
   },
   boatCreated: {
     type: Date,
