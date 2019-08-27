@@ -57,36 +57,36 @@ const boats = [
     rents: "12",
 
     price: "50"
-  },
-  {
-    thumbnail:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-
-    image:
-      "https://images.unsplash.com/photo-1527431293370-0cd188ca5d15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
-
-    name: "Live On the Wave",
-
-    location: "San Diego",
-
-    rents: "5",
-
-    price: "100"
-  },
-  {
-    thumbnail:
-      "https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=581&q=80",
-    image:
-      "https://images.unsplash.com/photo-1562812179-23b8920689a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2132&q=80",
-
-    name: "Dreamer",
-
-    location: "Marina Del Rey",
-
-    rents: "70",
-
-    price: "25"
   }
+  // {
+  //   thumbnail:
+  //     "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
+
+  //   image:
+  //     "https://images.unsplash.com/photo-1527431293370-0cd188ca5d15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
+
+  //   name: "Live On the Wave",
+
+  //   location: "San Diego",
+
+  //   rents: "5",
+
+  //   price: "100"
+  // },
+  // {
+  //   thumbnail:
+  //     "https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=581&q=80",
+  //   image:
+  //     "https://images.unsplash.com/photo-1562812179-23b8920689a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2132&q=80",
+
+  //   name: "Dreamer",
+
+  //   location: "Marina Del Rey",
+
+  //   rents: "70",
+
+  //   price: "25"
+  // }
 ];
 
 exports.addboat = function(req, res) {
